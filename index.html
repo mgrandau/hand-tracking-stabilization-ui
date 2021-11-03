@@ -1,0 +1,85 @@
+<html lang="en">
+
+<head>
+    <title>Astrophotography Clip Stabalization</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="This allows a user to upload or select a video clip and run a stabilization algorithm against it, that will generate a stabilized version of the video clip.">
+    <meta name="theme-color" content="#353535">
+
+    <style>
+        .title{
+            font-size: 40px;
+        }
+
+        .video-display{
+            width: 640px;
+            height: 360px;
+        }
+    </style>
+
+    <script>
+    </script>
+</head>
+
+<body>
+    <div id="screen-title" class="title">
+        Astrophotography Video Clip Stabilizer
+    </div>
+
+    <div id="instructions">
+        <p>This allows a user to upload or select a video clip and run a stabilization algorithm against it, that will generate a stabilized version of the video clip.</p>
+        <p>The video clips will be truncated to the first 500 frames of the clip.  This is done because of memory requirements and throughput response.</p> 
+    </div>
+
+    <div id="video-comparison">
+        <table>
+            <tr>
+                <td>
+                    <center>Unstabilized</center>
+                    <video id="unstabilized-video" class="video-display" controls autoplay>
+                        <source src="unstable.mp4" type="video/mp4">
+                    </video>
+                </td>
+                <td>
+                    <center>Stabilized</center>
+                    <video id="stabilized-video" class="video-display" controls autoplay>
+                        <source src="stable.mp4" type="video/mp4">
+                    </video>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="select-unstabilized-clip">
+        <p>
+            <button type="button">Run Clips</button>
+        </p>
+
+        <p>
+            <label for="unstable-clip">Choose a video clip:</label>
+            <select name="unstable-clip" id="unstable-clip">
+                <optgroup label="Stars">
+                    <option value="volvo">1</option>
+                    <option value="saab">2</option>
+                </optgroup>
+                <optgroup label="Moon">
+                    <option value="mercedes">1</option>
+                    <option value="audi">2</option>
+                </optgroup>
+            </select>
+            <button type="button">Stabilize Clip</button>
+        </p>
+
+        <p>
+            <input type="file"></input><button type="button">Upload and Process Clip</button>
+        </p>
+    </div>
+</body>
+
+</html>
