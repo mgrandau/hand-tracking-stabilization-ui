@@ -16,11 +16,6 @@
         .title{
             font-size: 40px;
         }
-
-        .video-display{
-            width: 640px;
-            height: 360px;
-        }
     </style>
 
     <script>
@@ -31,11 +26,17 @@
         }
 
         function load_cashed_clips() {
-            alert("This feature is not yet implemented");
-        }
 
-        function upload_process_clip(){
-            alert("This feature is not yet implemented");
+            document.getElementById("unstabilized-video").pause();
+            document.getElementById("stabilized-video").pause();
+
+            document.getElementById("unstabilized-video-source").setAttribute("src", document.getElementById("clips").value + "/unstable.mp4");
+            document.getElementById("stabilized-video-source").setAttribute("src", document.getElementById("clips").value + "/stable.mp4");
+
+            document.getElementById("unstabilized-video").load();
+            document.getElementById("stabilized-video").load();
+
+            run_clips();
         }
 
     </script>
@@ -47,8 +48,11 @@
     </div>
 
     <div id="instructions">
-        <p>This allows a user to upload or select a video clip and run a stabilization algorithm against it, that will generate a stabilized version of the video clip.</p>
-        <p>The video clips will be truncated to the first 500 frames of the clip.  This is done because of memory requirements and throughput response.</p> 
+        <p>This app displays the results of the use of stabilization ML model to clean up astrophotography video.</p>
+        <p>The goal of the project was to explore the state of the art in video stabilization. By using transfer learning I overcame the cold start problem.</p>
+        <p>I attempted to link it to a mechanism in <a href="https://edu.kde.org/kstars/">KStars</a>, but that whole connectivity thing is very messy and beyond the scope of time needed to complete this project. So I opted to just show the results.</p>
+        <p>I will continue to work on this but I need to put the project down and call it good enough for now.</p>
+        <p>I've included a short video to take you through the key findings</p>
     </div>
 
     <div id="video-comparison">
@@ -57,13 +61,13 @@
                 <td>
                     <center>Unstabilized</center>
                     <video id="unstabilized-video" class="video-display">
-                        <source src="unstable.mp4" type="video/mp4">
+                        <source id="unstabilized-video-source" src="unstable.mp4" type="video/mp4">
                     </video>
                 </td>
                 <td>
                     <center>Stabilized</center>
                     <video id="stabilized-video" class="video-display">
-                        <source src="stable.mp4" type="video/mp4">
+                        <source id="stabilized-video-source" src="stable.mp4" type="video/mp4">
                     </video>
                 </td>
             </tr>
@@ -76,12 +80,12 @@
         </p>
 
         <p>
-            <label for="unstable-clip">Choose a video clip:</label>
-            <select name="unstable-clip" id="unstable-clip">
+            <label for="clips">Choose a video clip:</label>
+            <select name="clips" id="clips">
                 <optgroup label="Model Comparisons">
-                    <option value="StabNet">StabNet Stabilization</option>
-                    <option value="DIFRINT">DIFRINT Stabilization</option>
-                    <option value="DUT">DUT Stabilization</option>
+                    <option value="Clips/StabNet">StabNet Stabilization</option>
+                    <option value="Clips/DIFRINT">DIFRINT Stabilization</option>
+                    <option value="Clips/DUT">DUT Stabilization</option>
                 </optgroup>
                 <optgroup label="Stars">
                     <option value="volvo">1</option>
@@ -95,10 +99,10 @@
             <button type="button" onclick="load_cashed_clips()">Get Selected Clip Set</button>
         </p>
 
-        <p>
-            <input type="file"></input>
-            <button type="button" onclick="upload_process_clip()">Upload and Process Clip</button>
-        </p>
+        <!--<form target="upload_process_file" method="post" enctype="multipart/form-data">
+		    <input name="upload_clip_filename" type="file">
+		    <input type="submit" value="Upload and Process Clip">
+    	</form>-->
     </div>
 </body>
 
