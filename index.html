@@ -51,8 +51,14 @@
         <p>This app displays the results of the use of stabilization ML model to clean up astrophotography video.</p>
         <p>The goal of the project was to explore the state of the art in video stabilization. By using transfer learning I overcame the cold start problem.</p>
         <p>I attempted to link it to a mechanism in <a href="https://edu.kde.org/kstars/">KStars</a>, but that whole connectivity thing is very messy and beyond the scope of time needed to complete this project. So I opted to just show the results.</p>
+        <p>I attempted to use Deep Unsupervised Trajectory-based Stabilization</p>
         <p>I will continue to work on this but I need to put the project down and call it good enough for now.</p>
-        <p>I've included a short video to take you through the key findings</p>
+        <p>I've included a short video to take you through the key findings.<br/><br/>
+        * Smooths thermals well (Lunar)<br/>
+        * Deals with vibrations (Lunar)<br/>
+        * large transitions have limited success, some clipping (Lunar)<br/>
+        * Not useful for stars. Not enough points to form Homographic translation. Need a different translation/smoothing model(s)<br/>
+        </p>
     </div>
 
     <div id="video-comparison">
@@ -81,15 +87,14 @@
 
         <p>
             <label for="clips">Choose a video clip:</label>
-            <select name="clips" id="clips">
+            <select name="clips" id="clips" onchange="load_cashed_clips();">
                 <optgroup label="Model Comparisons">
                     <option value="Clips/StabNet">StabNet Stabilization</option>
                     <option value="Clips/DIFRINT">DIFRINT Stabilization</option>
                     <option value="Clips/DUT">DUT Stabilization</option>
                 </optgroup>
                 <optgroup label="Stars">
-                    <option value="volvo">1</option>
-                    <option value="saab">2</option>
+                    <option value="Clips/star-small-trans-vibration">Small Trans w Vib (need pts)</option>
                 </optgroup>
                 <optgroup label="Moon">
                     <option value="Clips/moon-with-clouds">Clouds</option>
@@ -98,7 +103,6 @@
                     <option value="Clips/moon-big-move">Big Trans (Clipped)</option>
                 </optgroup>
             </select>
-            <button type="button" onclick="load_cashed_clips()">Get Selected Clip Set</button>
         </p>
 
         <!--<form target="upload_process_file" method="post" enctype="multipart/form-data">
